@@ -1,0 +1,56 @@
+public static <T> T randomKeyFrom(Map<T, ?> map) {
+    Arguments.checkNotNull(map, "map");
+    return randomElementFrom(map.keySet());
+  }
+
+  public static <T> T randomValueFrom(Map<?, T> map) {
+    Arguments.checkNotNull(map, "map");
+    return randomElementFrom(map.values());
+  }
+
+  public static <K, V> Map.Entry<K, V> randomEntryFrom(Map<K, V> map) {
+    Arguments.checkNotNull(map, "map");
+    return randomElementFrom(map.entrySet());
+  }
+  
+  
+  // panen testimise osa siia alla
+  
+  @Test
+  void randomUtils_RandomKeyFromMap_shouldReturnTrue() {
+    Map<String, Integer> initialMap = new HashMap();
+
+    initialMap.put("key", 10);
+    initialMap.put("key1", 1);
+    initialMap.put("key2", 6);
+
+    //Set<String> keys = initialMap.keySet();
+
+    String randomKey = RandomUtils.randomKeyFrom(initialMap);
+    //assertTrue(keys.contains(randomKey));
+    assertTrue(initialMap.containsKey(randomKey));
+  }
+  @Test
+  void randomUtils_RandomValueFromMap_shouldReturnTrue() {
+    Map<String, Integer> initialMap = new HashMap();
+
+    initialMap.put("key", 10);
+    initialMap.put("key1", 1);
+    initialMap.put("key2", 6);
+
+    Collection<Integer> values = initialMap.values();
+
+    Integer randomValue = RandomUtils.randomValueFrom(initialMap);
+    assertTrue(values.contains(randomValue));
+
+  }
+
+  @Test
+  void randomUtils_randomEntryFromMap_shouldReturnTrue() {
+    Map<String, Integer> initialMap = new HashMap();
+
+    initialMap.put("key", 10);
+    initialMap.put("key1", 1);
+    initialMap.put("key2", 6);
+
+    Map.Entry<String, Integer> entry = RandomUtils.randomEntryFrom(initialMap);
